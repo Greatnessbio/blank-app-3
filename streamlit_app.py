@@ -106,88 +106,44 @@ st.markdown("""
         padding: 2rem 0;
     }
 
-    /* Hide default streamlit button styling */
+    /* Style the card buttons */
     .stButton > button {
-        all: unset;
-        display: block;
-        width: 100%;
-        cursor: pointer;
-    }
-
-    /* App card styling */
-    .app-card-btn {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 16px;
-        padding: 2rem;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        color: white;
-        height: 360px;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .app-card-btn:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.18);
-    }
-
-    .card-icon-big {
-        font-size: 1.5rem;
-        line-height: 1;
-        margin-bottom: 0.25rem;
-    }
-
-    .card-title-big {
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 0.5rem;
-    }
-
-    .card-desc {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        opacity: 0.95;
-        margin-bottom: 0.75rem;
-    }
-
-    .card-features-list {
-        font-size: 0.85rem;
+        padding: 1.75rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        color: white !important;
+        height: 320px;
+        width: 100%;
+        text-align: left;
+        font-size: 0.9rem;
         line-height: 1.6;
-        opacity: 0.9;
+        white-space: pre-wrap;
     }
 
-    .feature-item {
-        padding-left: 1.5rem;
-        position: relative;
-        margin-bottom: 0.4rem;
+    .stButton > button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        border-color: rgba(255, 255, 255, 0.3);
     }
 
-    .feature-item:before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        font-weight: bold;
-        opacity: 0.8;
-    }
-
-    /* LinkedIn card - blue */
-    .linkedin-card {
+    /* First column = LinkedIn (blue) */
+    div[data-testid="column"]:first-child .stButton > button {
         background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
     }
 
-    .linkedin-card:hover {
+    div[data-testid="column"]:first-child .stButton > button:hover {
         background: linear-gradient(135deg, #0088CC 0%, #00B0EC 100%);
     }
 
-    /* Keywords card - purple */
-    .keywords-card {
+    /* Second column = Keywords (purple) */
+    div[data-testid="column"]:nth-child(2) .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .keywords-card:hover {
+    div[data-testid="column"]:nth-child(2) .stButton > button:hover {
         background: linear-gradient(135deg, #778efa 0%, #875bac 100%);
     }
 
