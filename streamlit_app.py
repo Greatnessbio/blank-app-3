@@ -106,86 +106,49 @@ st.markdown("""
         padding: 2rem 0;
     }
 
-    /* Hide button text, make button invisible */
-    button[kind="secondary"] {
-        color: transparent !important;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        height: 0px !important;
-        min-height: 0px !important;
-        margin: 0 !important;
-    }
-
-    button[kind="secondary"]:hover {
-        background: transparent !important;
-        border: none !important;
-    }
-
-    /* App card styling */
-    .app-card {
+    /* Style the buttons to look like cards */
+    .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
         border-radius: 12px;
         padding: 1.25rem;
-        margin-bottom: 0.75rem;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
         color: white;
         height: 320px;
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
+        width: 100%;
+        text-align: left;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        white-space: pre-wrap;
     }
 
-    .app-card:hover {
+    .stButton > button:hover {
         transform: translateY(-4px);
         box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
     }
 
-    .app-card.linkedin {
+    /* First column = LinkedIn (blue) */
+    div[data-testid="column"]:first-child .stButton > button {
         background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
     }
 
-    .app-card.keywords {
+    div[data-testid="column"]:first-child .stButton > button:hover {
+        background: linear-gradient(135deg, #0088CC 0%, #00B0EC 100%);
+    }
+
+    /* Second column = Keywords (purple) */
+    div[data-testid="column"]:nth-child(2) .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .card-icon {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
+    div[data-testid="column"]:nth-child(2) .stButton > button:hover {
+        background: linear-gradient(135deg, #778efa 0%, #875bac 100%);
     }
 
-    .card-title {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        color: white;
-    }
-
-    .card-description {
-        font-size: 0.85rem;
-        line-height: 1.4;
-        color: white;
-        margin-bottom: 0.5rem;
-    }
-
-    .card-features {
-        font-size: 0.75rem;
-        line-height: 1.3;
-        color: white;
-        flex-grow: 1;
-    }
-
-    .card-features ul {
-        margin: 0.25rem 0 0 0;
-        padding-left: 1.2rem;
-        list-style-type: disc;
-    }
-
-    .card-features li {
-        margin: 0.2rem 0;
-    }
 
     /* Header styling */
     .dashboard-header {
@@ -239,60 +202,46 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        # LinkedIn Analysis Card - clickable container
-        if st.button("click", key="linkedin_btn", use_container_width=True):
+        # LinkedIn Analysis Card - the button IS the card
+        linkedin_text = """📊
+
+LinkedIn Analysis
+
+Complete LinkedIn intelligence platform for analyzing company presence and generating content
+
+Features:
+• Scrape and analyze 50+ LinkedIn posts
+• AI-powered voice & tone profiling
+• Content strategy analysis
+• Competitor comparison dashboard
+• Generate posts in client's voice
+• SEO keyword integration
+• Engagement metrics tracking"""
+
+        if st.button(linkedin_text, key="linkedin_btn", use_container_width=True):
             st.query_params["app"] = "linkedin"
             st.rerun()
 
-        st.markdown("""
-        <div class="app-card linkedin">
-            <div class="card-icon">📊</div>
-            <div class="card-title">LinkedIn Analysis</div>
-            <div class="card-description">
-                Complete LinkedIn intelligence platform for analyzing company presence and generating content
-            </div>
-            <div class="card-features">
-                <strong>Features:</strong>
-                <ul>
-                    <li>Scrape and analyze 50+ LinkedIn posts</li>
-                    <li>AI-powered voice & tone profiling</li>
-                    <li>Content strategy analysis</li>
-                    <li>Competitor comparison dashboard</li>
-                    <li>Generate posts in client's voice</li>
-                    <li>SEO keyword integration</li>
-                    <li>Engagement metrics tracking</li>
-                </ul>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
     with col2:
-        # Keyword Research Card - clickable container
-        if st.button("click", key="keywords_btn", use_container_width=True):
+        # Keyword Research Card - the button IS the card
+        keywords_text = """🔍
+
+Keyword Research
+
+Advanced SEO keyword research tool with competitor analysis and trend tracking
+
+Features:
+• Search volume & CPC data
+• 100+ related keyword suggestions
+• Competitor URL analysis
+• Opportunity scoring algorithm
+• 12-month trend visualization
+• Seasonality detection
+• Export to CSV/JSON"""
+
+        if st.button(keywords_text, key="keywords_btn", use_container_width=True):
             st.query_params["app"] = "keywords"
             st.rerun()
-
-        st.markdown("""
-        <div class="app-card keywords">
-            <div class="card-icon">🔍</div>
-            <div class="card-title">Keyword Research</div>
-            <div class="card-description">
-                Advanced SEO keyword research tool with competitor analysis and trend tracking
-            </div>
-            <div class="card-features">
-                <strong>Features:</strong>
-                <ul>
-                    <li>Search volume & CPC data</li>
-                    <li>100+ related keyword suggestions</li>
-                    <li>Competitor URL analysis</li>
-                    <li>Opportunity scoring algorithm</li>
-                    <li>12-month trend visualization</li>
-                    <li>Seasonality detection</li>
-                    <li>Export to CSV/JSON</li>
-                </ul>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
     # Footer info
     st.markdown("<br><br>", unsafe_allow_html=True)
