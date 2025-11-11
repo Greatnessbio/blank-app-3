@@ -106,46 +106,88 @@ st.markdown("""
         padding: 2rem 0;
     }
 
-    /* Style the buttons to look like cards */
+    /* Hide default streamlit button styling */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
-        border-radius: 12px;
-        padding: 1.25rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-        color: white;
-        height: 320px;
+        all: unset;
+        display: block;
         width: 100%;
-        text-align: left;
-        font-size: 0.85rem;
-        line-height: 1.4;
-        white-space: pre-wrap;
+        cursor: pointer;
     }
 
-    .stButton > button:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    /* App card styling */
+    .app-card-btn {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         color: white;
+        height: 360px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    /* First column = LinkedIn (blue) */
-    div[data-testid="column"]:first-child .stButton > button {
+    .app-card-btn:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    }
+
+    .card-icon-big {
+        font-size: 1.5rem;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+    }
+
+    .card-title-big {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        opacity: 0.95;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-features-list {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    .feature-item {
+        padding-left: 1.5rem;
+        position: relative;
+        margin-bottom: 0.4rem;
+    }
+
+    .feature-item:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        opacity: 0.8;
+    }
+
+    /* LinkedIn card - blue */
+    .linkedin-card {
         background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
     }
 
-    div[data-testid="column"]:first-child .stButton > button:hover {
+    .linkedin-card:hover {
         background: linear-gradient(135deg, #0088CC 0%, #00B0EC 100%);
     }
 
-    /* Second column = Keywords (purple) */
-    div[data-testid="column"]:nth-child(2) .stButton > button {
+    /* Keywords card - purple */
+    .keywords-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    div[data-testid="column"]:nth-child(2) .stButton > button:hover {
+    .keywords-card:hover {
         background: linear-gradient(135deg, #778efa 0%, #875bac 100%);
     }
 
@@ -202,46 +244,46 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        # LinkedIn Analysis Card - the button IS the card
-        linkedin_text = """📊
-
-LinkedIn Analysis
-
-Complete LinkedIn intelligence platform for analyzing company presence and generating content
-
-Features:
-• Scrape and analyze 50+ LinkedIn posts
-• AI-powered voice & tone profiling
-• Content strategy analysis
-• Competitor comparison dashboard
-• Generate posts in client's voice
-• SEO keyword integration
-• Engagement metrics tracking"""
-
-        if st.button(linkedin_text, key="linkedin_btn", use_container_width=True):
+        # LinkedIn Analysis Card
+        if st.button("linkedin", key="linkedin_btn", use_container_width=True):
             st.query_params["app"] = "linkedin"
             st.rerun()
 
+        st.markdown("""
+        <div class="app-card-btn linkedin-card" style="margin-top: -380px; pointer-events: none;">
+            <div class="card-icon-big">📊</div>
+            <div class="card-title-big">LinkedIn Analysis</div>
+            <div class="card-desc">Complete LinkedIn intelligence platform for analyzing company presence and generating content</div>
+            <div class="card-features-list">
+                <div class="feature-item">Scrape and analyze 50+ LinkedIn posts</div>
+                <div class="feature-item">AI-powered voice & tone profiling</div>
+                <div class="feature-item">Content strategy analysis</div>
+                <div class="feature-item">Competitor comparison dashboard</div>
+                <div class="feature-item">Generate posts in client's voice</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     with col2:
-        # Keyword Research Card - the button IS the card
-        keywords_text = """🔍
-
-Keyword Research
-
-Advanced SEO keyword research tool with competitor analysis and trend tracking
-
-Features:
-• Search volume & CPC data
-• 100+ related keyword suggestions
-• Competitor URL analysis
-• Opportunity scoring algorithm
-• 12-month trend visualization
-• Seasonality detection
-• Export to CSV/JSON"""
-
-        if st.button(keywords_text, key="keywords_btn", use_container_width=True):
+        # Keyword Research Card
+        if st.button("keywords", key="keywords_btn", use_container_width=True):
             st.query_params["app"] = "keywords"
             st.rerun()
+
+        st.markdown("""
+        <div class="app-card-btn keywords-card" style="margin-top: -380px; pointer-events: none;">
+            <div class="card-icon-big">🔍</div>
+            <div class="card-title-big">Keyword Research</div>
+            <div class="card-desc">Advanced SEO keyword research tool with competitor analysis and trend tracking</div>
+            <div class="card-features-list">
+                <div class="feature-item">Search volume & CPC data</div>
+                <div class="feature-item">100+ related keyword suggestions</div>
+                <div class="feature-item">Competitor URL analysis</div>
+                <div class="feature-item">Opportunity scoring algorithm</div>
+                <div class="feature-item">12-month trend visualization</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Footer info
     st.markdown("<br><br>", unsafe_allow_html=True)
