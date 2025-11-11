@@ -6,11 +6,14 @@ import streamlit as st
 
 # Page configuration
 st.set_page_config(
-    page_title="SEO & Marketing Tools",
+    page_title="Annabox Lite",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+# Display title and subtitle
+st.title("Annabox Lite")  # Main title (optional, but pairs well)
+st.subheader("Your Subtitle Here")  # Add this for the subtitle
 
 # Initialize session state for authentication
 if "authenticated" not in st.session_state:
