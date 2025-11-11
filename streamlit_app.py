@@ -1,3 +1,7 @@
+"""
+Modern Dashboard Streamlit App with Query Parameter Navigation
+"""
+
 import streamlit as st
 
 # Page configuration
@@ -64,8 +68,8 @@ def check_password():
 
         with col2:
             st.markdown("<br><br><br>", unsafe_allow_html=True)
-            st.markdown("# 🚀 SEO & Marketing Tools")
-            st.markdown("### Please login to continue")
+            st.markdown("# 🚀 SEO & Marketing Tools")  # Main title
+            st.markdown("### Modern Dashboard Streamlit App with Query Parameter Navigation")  # Updated subtitle here
             st.markdown("<br>", unsafe_allow_html=True)
 
             st.text_input("Username", key="username", placeholder="Enter username")
@@ -84,10 +88,6 @@ def check_password():
 
 # Authentication gate - stops here if not authenticated
 check_password()
-
-# Display title and subtitle (now only for authenticated users)
-st.title("Annabox Lite")  # Main title
-st.subheader("Modern Dashboard Streamlit App with Query Parameter Navigation")  # Updated subtitle
 
 # ============================================================================
 # AUTHENTICATED USER AREA - Only renders if authentication passes
