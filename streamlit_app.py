@@ -106,45 +106,16 @@ st.markdown("""
         padding: 2rem 0;
     }
 
-    /* Style the card buttons */
-    .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-        padding: 1.75rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-        color: white !important;
-        height: 320px;
-        width: 100%;
-        text-align: left;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        white-space: pre-wrap;
-    }
-
-    .stButton > button:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
     /* First column = LinkedIn (blue) */
     div[data-testid="column"]:first-child .stButton > button {
         background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
-    }
-
-    div[data-testid="column"]:first-child .stButton > button:hover {
-        background: linear-gradient(135deg, #0088CC 0%, #00B0EC 100%);
+        color: white;
     }
 
     /* Second column = Keywords (purple) */
     div[data-testid="column"]:nth-child(2) .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    div[data-testid="column"]:nth-child(2) .stButton > button:hover {
-        background: linear-gradient(135deg, #778efa 0%, #875bac 100%);
+        color: white;
     }
 
 
