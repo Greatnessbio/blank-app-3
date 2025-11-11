@@ -106,40 +106,36 @@ st.markdown("""
         padding: 2rem 0;
     }
 
-    /* App card button styling - makes button look like a card */
-    div[data-testid="column"] > div > div > div > button {
+    /* App card styling */
+    .app-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
         border-radius: 12px;
         padding: 1.25rem;
+        margin-bottom: 0.75rem;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
         color: white;
-        height: auto;
-        min-height: 180px;
-        text-align: left;
-        font-size: 0.85rem;
+        height: 320px;
+        display: flex;
+        flex-direction: column;
     }
 
-    div[data-testid="column"] > div > div > div > button:hover {
+    .app-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
     }
 
-    div[data-testid="column"]:first-child button {
+    .app-card.linkedin {
         background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
     }
 
-    div[data-testid="column"]:first-child button:hover {
-        background: linear-gradient(135deg, #0088CC 0%, #00B0EC 100%);
+    .app-card.keywords {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
     .card-icon {
         font-size: 2rem;
         margin-bottom: 0.5rem;
-        display: block;
     }
 
     .card-title {
@@ -152,7 +148,6 @@ st.markdown("""
     .card-description {
         font-size: 0.85rem;
         line-height: 1.4;
-        opacity: 0.9;
         color: white;
         margin-bottom: 0.5rem;
     }
@@ -160,18 +155,18 @@ st.markdown("""
     .card-features {
         font-size: 0.75rem;
         line-height: 1.3;
-        opacity: 0.85;
         color: white;
-        margin-top: 0.5rem;
+        flex-grow: 1;
     }
 
     .card-features ul {
         margin: 0.25rem 0 0 0;
-        padding-left: 1rem;
+        padding-left: 1.2rem;
+        list-style-type: disc;
     }
 
     .card-features li {
-        margin: 0.15rem 0;
+        margin: 0.2rem 0;
     }
 
     /* Header styling */
@@ -226,24 +221,58 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        # LinkedIn Analysis Card - entire button is the card
-        linkedin_card = st.button(
-            """📊\n\n**LinkedIn Analysis**\n\nComplete LinkedIn intelligence platform for analyzing company presence and generating content\n\n**Features:**\n• Scrape and analyze 50+ LinkedIn posts\n• AI-powered voice & tone profiling\n• Content strategy analysis\n• Competitor comparison dashboard\n• Generate posts in client's voice\n• SEO keyword integration\n• Engagement metrics tracking""",
-            key="linkedin_btn",
-            use_container_width=True
-        )
-        if linkedin_card:
+        # LinkedIn Analysis Card
+        st.markdown("""
+        <div class="app-card linkedin">
+            <div class="card-icon">📊</div>
+            <div class="card-title">LinkedIn Analysis</div>
+            <div class="card-description">
+                Complete LinkedIn intelligence platform for analyzing company presence and generating content
+            </div>
+            <div class="card-features">
+                <strong>Features:</strong>
+                <ul>
+                    <li>Scrape and analyze 50+ LinkedIn posts</li>
+                    <li>AI-powered voice & tone profiling</li>
+                    <li>Content strategy analysis</li>
+                    <li>Competitor comparison dashboard</li>
+                    <li>Generate posts in client's voice</li>
+                    <li>SEO keyword integration</li>
+                    <li>Engagement metrics tracking</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open App", key="linkedin_btn", use_container_width=True, type="primary"):
             st.query_params["app"] = "linkedin"
             st.rerun()
 
     with col2:
-        # Keyword Research Card - entire button is the card
-        keywords_card = st.button(
-            """🔍\n\n**Keyword Research**\n\nAdvanced SEO keyword research tool with competitor analysis and trend tracking\n\n**Features:**\n• Search volume & CPC data\n• 100+ related keyword suggestions\n• Competitor URL analysis\n• Opportunity scoring algorithm\n• 12-month trend visualization\n• Seasonality detection\n• Export to CSV/JSON""",
-            key="keywords_btn",
-            use_container_width=True
-        )
-        if keywords_card:
+        # Keyword Research Card
+        st.markdown("""
+        <div class="app-card keywords">
+            <div class="card-icon">🔍</div>
+            <div class="card-title">Keyword Research</div>
+            <div class="card-description">
+                Advanced SEO keyword research tool with competitor analysis and trend tracking
+            </div>
+            <div class="card-features">
+                <strong>Features:</strong>
+                <ul>
+                    <li>Search volume & CPC data</li>
+                    <li>100+ related keyword suggestions</li>
+                    <li>Competitor URL analysis</li>
+                    <li>Opportunity scoring algorithm</li>
+                    <li>12-month trend visualization</li>
+                    <li>Seasonality detection</li>
+                    <li>Export to CSV/JSON</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("Open App", key="keywords_btn", use_container_width=True, type="primary"):
             st.query_params["app"] = "keywords"
             st.rerun()
 
