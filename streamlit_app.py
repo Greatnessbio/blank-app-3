@@ -106,15 +106,27 @@ st.markdown("""
         padding: 2rem 0;
     }
 
-    /* First column = LinkedIn (blue) */
-    div[data-testid="column"]:first-child .stButton > button {
+    /* Row 1 - LinkedIn (blue) */
+    div[data-testid="column"]:nth-child(1) .stButton > button {
         background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
         color: white;
     }
 
-    /* Second column = Keywords (purple) */
+    /* Row 1 - Keywords (purple) */
     div[data-testid="column"]:nth-child(2) .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    /* Row 2 - App 3 (green) */
+    div[data-testid="column"]:nth-child(3) .stButton > button {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+    }
+
+    /* Row 2 - App 4 (orange) */
+    div[data-testid="column"]:nth-child(4) .stButton > button {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
     }
 
@@ -171,7 +183,7 @@ def render_dashboard():
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # App cards in two columns
+    # App cards - Row 1
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
@@ -206,9 +218,70 @@ Advanced SEO keyword research tool with competitor analysis and trend tracking
 
         st.button(keywords_card, key="keywords_btn", use_container_width=True, on_click=navigate_to_app, args=("keywords",))
 
-    # Footer info
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # App cards - Row 2
+    col3, col4 = st.columns(2, gap="large")
+
+    with col3:
+        app3_card = """📈
+
+**Analytics Dashboard**
+
+Coming Soon
+
+**Features:**
+✓ Performance tracking
+✓ Custom reports
+✓ Data visualization
+✓ Export capabilities
+✓ Real-time insights"""
+
+        st.button(app3_card, key="app3_btn", use_container_width=True, on_click=navigate_to_app, args=("app3",))
+
+    with col4:
+        app4_card = """🎯
+
+**Content Planner**
+
+Coming Soon
+
+**Features:**
+✓ Content calendar
+✓ Topic research
+✓ Publishing scheduler
+✓ Campaign tracking
+✓ Team collaboration"""
+
+        st.button(app4_card, key="app4_btn", use_container_width=True, on_click=navigate_to_app, args=("app4",))
+
+    # Suggest Workflow Button
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.info("💡 **Tip:** Each tool includes advanced features, data export, and AI-powered insights to accelerate your marketing workflows.")
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown("""
+        <a href="https://forms.cloud.microsoft/r/eJnE5Lji2h" target="_blank" style="text-decoration: none;">
+            <button style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                padding: 0.75rem 2rem;
+                font-size: 1rem;
+                border-radius: 8px;
+                cursor: pointer;
+                width: 100%;
+                font-weight: 600;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transition: all 0.3s ease;
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,0,0,0.2)';"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';">
+                💡 Suggest a Workflow
+            </button>
+        </a>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
 
 def render_app(app_name):
     """Render the selected app based on query parameter."""
