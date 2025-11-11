@@ -1,7 +1,3 @@
-"""
-Modern Dashboard Streamlit App with Query Parameter Navigation
-"""
-
 import streamlit as st
 
 # Page configuration
@@ -11,9 +7,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
-# Display title and subtitle
-st.title("Annabox Lite")  # Main title (optional, but pairs well)
-st.subheader("Your Subtitle Here")  # Add this for the subtitle
 
 # Initialize session state for authentication
 if "authenticated" not in st.session_state:
@@ -91,6 +84,10 @@ def check_password():
 
 # Authentication gate - stops here if not authenticated
 check_password()
+
+# Display title and subtitle (now only for authenticated users)
+st.title("Annabox Lite")  # Main title
+st.subheader("Modern Dashboard Streamlit App with Query Parameter Navigation")  # Updated subtitle
 
 # ============================================================================
 # AUTHENTICATED USER AREA - Only renders if authentication passes
