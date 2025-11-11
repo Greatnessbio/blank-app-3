@@ -220,6 +220,10 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+def navigate_to_app(app_name):
+    """Callback to navigate to app"""
+    st.query_params["app"] = app_name
+
 def render_dashboard():
     """Render the modern card-based dashboard."""
 
@@ -244,44 +248,36 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        st.markdown("""
-        <div class="app-card-btn linkedin-card">
-            <div class="card-icon-big">📊</div>
-            <div class="card-title-big">LinkedIn Analysis</div>
-            <div class="card-desc">Complete LinkedIn intelligence platform for analyzing company presence and generating content</div>
-            <div class="card-features-list">
-                <div class="feature-item">Scrape and analyze 50+ LinkedIn posts</div>
-                <div class="feature-item">AI-powered voice & tone profiling</div>
-                <div class="feature-item">Content strategy analysis</div>
-                <div class="feature-item">Competitor comparison dashboard</div>
-                <div class="feature-item">Generate posts in client's voice</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        linkedin_card = """📊
 
-        if st.button("Open LinkedIn Analysis", key="linkedin_btn", use_container_width=True, type="primary"):
-            st.query_params["app"] = "linkedin"
-            st.rerun()
+**LinkedIn Analysis**
+
+Complete LinkedIn intelligence platform for analyzing company presence and generating content
+
+**Features:**
+✓ Scrape and analyze 50+ LinkedIn posts
+✓ AI-powered voice & tone profiling
+✓ Content strategy analysis
+✓ Competitor comparison dashboard
+✓ Generate posts in client's voice"""
+
+        st.button(linkedin_card, key="linkedin_btn", use_container_width=True, on_click=navigate_to_app, args=("linkedin",))
 
     with col2:
-        st.markdown("""
-        <div class="app-card-btn keywords-card">
-            <div class="card-icon-big">🔍</div>
-            <div class="card-title-big">Keyword Research</div>
-            <div class="card-desc">Advanced SEO keyword research tool with competitor analysis and trend tracking</div>
-            <div class="card-features-list">
-                <div class="feature-item">Search volume & CPC data</div>
-                <div class="feature-item">100+ related keyword suggestions</div>
-                <div class="feature-item">Competitor URL analysis</div>
-                <div class="feature-item">Opportunity scoring algorithm</div>
-                <div class="feature-item">12-month trend visualization</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        keywords_card = """🔍
 
-        if st.button("Open Keyword Research", key="keywords_btn", use_container_width=True, type="primary"):
-            st.query_params["app"] = "keywords"
-            st.rerun()
+**Keyword Research**
+
+Advanced SEO keyword research tool with competitor analysis and trend tracking
+
+**Features:**
+✓ Search volume & CPC data
+✓ 100+ related keyword suggestions
+✓ Competitor URL analysis
+✓ Opportunity scoring algorithm
+✓ 12-month trend visualization"""
+
+        st.button(keywords_card, key="keywords_btn", use_container_width=True, on_click=navigate_to_app, args=("keywords",))
 
     # Footer info
     st.markdown("<br><br>", unsafe_allow_html=True)
