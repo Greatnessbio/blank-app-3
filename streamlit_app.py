@@ -106,6 +106,23 @@ st.markdown("""
         padding: 2rem 0;
     }
 
+    /* Hide button text, make button invisible */
+    button[kind="secondary"] {
+        color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        height: 0px !important;
+        min-height: 0px !important;
+        margin: 0 !important;
+    }
+
+    button[kind="secondary"]:hover {
+        background: transparent !important;
+        border: none !important;
+    }
+
     /* App card styling */
     .app-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -118,6 +135,7 @@ st.markdown("""
         height: 320px;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
     }
 
     .app-card:hover {
@@ -221,7 +239,11 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        # LinkedIn Analysis Card
+        # LinkedIn Analysis Card - clickable container
+        if st.button("click", key="linkedin_btn", use_container_width=True):
+            st.query_params["app"] = "linkedin"
+            st.rerun()
+
         st.markdown("""
         <div class="app-card linkedin">
             <div class="card-icon">📊</div>
@@ -244,12 +266,12 @@ def render_dashboard():
         </div>
         """, unsafe_allow_html=True)
 
-        if st.button("Open App", key="linkedin_btn", use_container_width=True, type="primary"):
-            st.query_params["app"] = "linkedin"
+    with col2:
+        # Keyword Research Card - clickable container
+        if st.button("click", key="keywords_btn", use_container_width=True):
+            st.query_params["app"] = "keywords"
             st.rerun()
 
-    with col2:
-        # Keyword Research Card
         st.markdown("""
         <div class="app-card keywords">
             <div class="card-icon">🔍</div>
@@ -271,10 +293,6 @@ def render_dashboard():
             </div>
         </div>
         """, unsafe_allow_html=True)
-
-        if st.button("Open App", key="keywords_btn", use_container_width=True, type="primary"):
-            st.query_params["app"] = "keywords"
-            st.rerun()
 
     # Footer info
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -308,15 +326,19 @@ def render_app(app_name):
         try:
             from app_linkedin import render_linkedin_app
             render_linkedin_app()
-        except ImportError:
-            st.error("LinkedIn Analysis module not found. Please ensure app_linkedin.py exists.")
+        except ImportError as e:
+            st.error(f"LinkedIn Analysis module not found: {str(e)}")
+        except Exception as e:
+            st.error(f"Error loading LinkedIn Analysis: {str(e)}")
 
     elif app_name == "keywords":
         try:
             from app_keywords import render_keywords_app
             render_keywords_app()
-        except ImportError:
-            st.error("Keyword Research module not found. Please ensure app_keywords.py exists.")
+        except ImportError as e:
+            st.error(f"Keyword Research module not found: {str(e)}")
+        except Exception as e:
+            st.error(f"Error loading Keyword Research: {str(e)}")
 
     else:
         st.error(f"Unknown app: {app_name}")
