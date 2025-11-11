@@ -6,7 +6,7 @@ import streamlit as st
 
 # Page configuration
 st.set_page_config(
-    page_title="Annabox Lite",
+    page_title="Agency Lite",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -68,8 +68,8 @@ def check_password():
 
         with col2:
             st.markdown("<br><br><br>", unsafe_allow_html=True)
-            st.markdown("# 🚀 SEO & Marketing Tools")  # Main title
-            st.markdown("### Modern Dashboard Streamlit App with Query Parameter Navigation")  # Updated subtitle here
+            st.markdown("# 🚀 Agency Lite")  # Updated main title
+            st.markdown("### Modern Dashboard Streamlit App with Query Parameter Navigation")  # Subtitle
             st.markdown("<br>", unsafe_allow_html=True)
 
             st.text_input("Username", key="username", placeholder="Enter username")
@@ -169,7 +169,7 @@ def render_dashboard():
     # Header
     st.markdown("""
     <div class="dashboard-header">
-        <h1 class="dashboard-title">🚀 SEO & Marketing Tools</h1>
+        <h1 class="dashboard-title">🚀 Agency Lite</h1>
         <p class="dashboard-subtitle">Select a tool to get started with your analysis</p>
     </div>
     """, unsafe_allow_html=True)
