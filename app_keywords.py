@@ -21,6 +21,79 @@ def render_keywords_app():
 
     st.title("📊 Complete Keywords Research")
 
+    # HOW IT WORKS SECTION
+    with st.expander("ℹ️ How Keyword Research Works", expanded=False):
+        st.markdown("""
+        ### Powered by DataForSEO Keywords Data API
+
+        This tool uses real-time data from **DataForSEO**, which aggregates keyword metrics from Google Ads and Google Search Console
+        to provide accurate, up-to-date keyword intelligence for SEO and PPC campaigns.
+
+        #### What You Can Research:
+
+        **1. Single Keyword Analysis**
+        - Get detailed metrics for a specific keyword
+        - See search volume, cost-per-click, and competition data
+
+        **2. Related Keywords (100 suggestions)**
+        - Discover up to 100 related keyword ideas
+        - Find variations and long-tail opportunities
+
+        **3. Competitor Keyword Analysis**
+        - Enter a competitor's URL to see what keywords they rank for
+        - Discover gaps in your keyword strategy
+
+        ---
+
+        ### Understanding the Metrics
+
+        **Search Volume** 📊
+        - Average monthly searches for the keyword on Google
+        - Higher volume = more potential traffic (but usually more competition)
+
+        **CPC (Cost-Per-Click)** 💰
+        - Average cost advertisers pay per click in Google Ads
+        - Higher CPC often indicates commercial intent and value
+        - Note: CPC data is only available for United States location
+
+        **Competition** ⚔️
+        - Represents how many advertisers compete for this keyword in Google Ads
+        - Scale: 0 to 1 (0 = low competition, 1 = high competition)
+        - Categorized as: **LOW**, **MEDIUM**, or **HIGH**
+
+        **Opportunity Score** 🎯
+        - Our proprietary calculation combining search volume and competition
+        - Scale: 0 to 10 (higher = better opportunity)
+        - 🟢 7-10: High opportunity | 🟡 4-7: Moderate | 🔴 0-4: Low
+
+        **Growth Rate** 📈
+        - Percentage change in search volume over the last 12 months
+        - Positive % = growing interest | Negative % = declining interest
+
+        **Seasonality Detection** 🗓️
+        - Identifies keywords with seasonal search patterns
+        - Shows peak months when search volume spikes
+        - Example: "halloween costumes" peaks in October
+
+        **12-Month Trend** 📉
+        - Historical search volume for each of the past 12 months
+        - Visualize search patterns and growth trends
+        - Useful for planning content calendars and ad spend
+
+        ---
+
+        ### How to Use This Tool
+
+        1. **Enter a keyword or competitor URL** above
+        2. **Review the results** - All keywords are sorted by opportunity score by default
+        3. **Apply filters** to narrow down keywords by volume, competition, or trend
+        4. **Select keywords** using checkboxes to compare trends side-by-side
+        5. **Download data** as CSV or JSON for further analysis
+
+        **Pro Tip:** Start with broad keywords to discover related terms, then filter by opportunity score
+        to find the best keywords for your SEO strategy.
+        """)
+
     # Initialize session state
     if "keywords_data" not in st.session_state:
         st.session_state.keywords_data = []
