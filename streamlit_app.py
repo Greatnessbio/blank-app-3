@@ -1,5 +1,5 @@
 """
-Modern Dashboard Streamlit App with Query Parameter Navigation
+Automated Workflows
 """
 
 import streamlit as st
