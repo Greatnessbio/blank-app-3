@@ -109,22 +109,19 @@ st.markdown("""
     /* App card styling */
     .app-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 16px;
-        padding: 2.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 0.5rem 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
         cursor: pointer;
         color: white;
-        height: 280px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        min-height: 200px;
     }
 
     .app-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     }
 
     .app-card.linkedin {
@@ -136,29 +133,41 @@ st.markdown("""
     }
 
     .card-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
         display: block;
     }
 
     .card-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
         color: white;
     }
 
     .card-description {
-        font-size: 1.1rem;
-        line-height: 1.6;
+        font-size: 0.95rem;
+        line-height: 1.5;
         opacity: 0.95;
         color: white;
+        margin-bottom: 0.5rem;
     }
 
-    .card-arrow {
-        font-size: 1.5rem;
-        margin-top: 1rem;
-        opacity: 0.8;
+    .card-features {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        opacity: 0.85;
+        color: white;
+        margin-top: 0.75rem;
+    }
+
+    .card-features ul {
+        margin: 0.5rem 0 0 0;
+        padding-left: 1.25rem;
+    }
+
+    .card-features li {
+        margin: 0.25rem 0;
     }
 
     /* Header styling */
@@ -213,44 +222,62 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        # LinkedIn Analysis Card
-        st.markdown("""
-        <div class="app-card linkedin">
-            <div>
+        # LinkedIn Analysis Card with clickable container
+        with st.container():
+            st.markdown("""
+            <div class="app-card linkedin">
                 <span class="card-icon">📊</span>
                 <h2 class="card-title">LinkedIn Analysis</h2>
                 <p class="card-description">
-                    Analyze company LinkedIn presence, voice profiles, and content strategy.
-                    Generate AI-powered posts in your client's unique voice.
+                    Complete LinkedIn intelligence platform for analyzing company presence and generating content
                 </p>
+                <div class="card-features">
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Scrape and analyze 50+ LinkedIn posts</li>
+                        <li>AI-powered voice & tone profiling</li>
+                        <li>Content strategy analysis</li>
+                        <li>Competitor comparison dashboard</li>
+                        <li>Generate posts in client's voice</li>
+                        <li>SEO keyword integration</li>
+                        <li>Engagement metrics tracking</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-arrow">→ Click to start analyzing</div>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-        if st.button("Open LinkedIn Analysis", key="linkedin_btn", use_container_width=True, type="primary"):
-            st.query_params["app"] = "linkedin"
-            st.rerun()
+            if st.button("Open LinkedIn Analysis →", key="linkedin_btn", use_container_width=True, type="primary"):
+                st.query_params["app"] = "linkedin"
+                st.rerun()
 
     with col2:
-        # Keyword Research Card
-        st.markdown("""
-        <div class="app-card keywords">
-            <div>
+        # Keyword Research Card with clickable container
+        with st.container():
+            st.markdown("""
+            <div class="app-card keywords">
                 <span class="card-icon">🔍</span>
                 <h2 class="card-title">Keyword Research</h2>
                 <p class="card-description">
-                    Discover high-value keywords, analyze competitors, track trends, and
-                    identify content opportunities with advanced SEO metrics.
+                    Advanced SEO keyword research tool with competitor analysis and trend tracking
                 </p>
+                <div class="card-features">
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Search volume & CPC data</li>
+                        <li>100+ related keyword suggestions</li>
+                        <li>Competitor URL analysis</li>
+                        <li>Opportunity scoring algorithm</li>
+                        <li>12-month trend visualization</li>
+                        <li>Seasonality detection</li>
+                        <li>Export to CSV/JSON</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-arrow">→ Click to start researching</div>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-        if st.button("Open Keyword Research", key="keywords_btn", use_container_width=True, type="primary"):
-            st.query_params["app"] = "keywords"
-            st.rerun()
+            if st.button("Open Keyword Research →", key="keywords_btn", use_container_width=True, type="primary"):
+                st.query_params["app"] = "keywords"
+                st.rerun()
 
     # Footer info
     st.markdown("<br><br>", unsafe_allow_html=True)
