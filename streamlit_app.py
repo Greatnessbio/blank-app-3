@@ -69,7 +69,7 @@ def check_password():
         with col2:
             st.markdown("<br><br><br>", unsafe_allow_html=True)
             st.markdown("# 🚀 Agency Lite")  # Updated main title
-            st.markdown("### Modern Dashboard Streamlit App with Query Parameter Navigation")  # Subtitle
+            st.markdown("### Automated Workflows")  # Subtitle
             st.markdown("<br>", unsafe_allow_html=True)
 
             st.text_input("Username", key="username", placeholder="Enter username")
