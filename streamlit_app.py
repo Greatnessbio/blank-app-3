@@ -323,22 +323,12 @@ def render_app(app_name):
 
     # Import and render the appropriate app
     if app_name == "linkedin":
-        try:
-            from app_linkedin import render_linkedin_app
-            render_linkedin_app()
-        except ImportError as e:
-            st.error(f"LinkedIn Analysis module not found: {str(e)}")
-        except Exception as e:
-            st.error(f"Error loading LinkedIn Analysis: {str(e)}")
+        from app_linkedin import render_linkedin_app
+        render_linkedin_app()
 
     elif app_name == "keywords":
-        try:
-            from app_keywords import render_keywords_app
-            render_keywords_app()
-        except ImportError as e:
-            st.error(f"Keyword Research module not found: {str(e)}")
-        except Exception as e:
-            st.error(f"Error loading Keyword Research: {str(e)}")
+        from app_keywords import render_keywords_app
+        render_keywords_app()
 
     else:
         st.error(f"Unknown app: {app_name}")
@@ -351,7 +341,10 @@ if not check_password():
     st.stop()
 
 # Check if an app is selected via query params
-selected_app = st.query_params.get("app")
+try:
+    selected_app = st.query_params.get("app")
+except:
+    selected_app = None
 
 if selected_app:
     # Render the selected app
