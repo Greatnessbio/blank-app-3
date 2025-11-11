@@ -244,13 +244,8 @@ def render_dashboard():
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        # LinkedIn Analysis Card
-        if st.button("linkedin", key="linkedin_btn", use_container_width=True):
-            st.query_params["app"] = "linkedin"
-            st.rerun()
-
         st.markdown("""
-        <div class="app-card-btn linkedin-card" style="margin-top: -380px; pointer-events: none;">
+        <div class="app-card-btn linkedin-card">
             <div class="card-icon-big">📊</div>
             <div class="card-title-big">LinkedIn Analysis</div>
             <div class="card-desc">Complete LinkedIn intelligence platform for analyzing company presence and generating content</div>
@@ -264,14 +259,13 @@ def render_dashboard():
         </div>
         """, unsafe_allow_html=True)
 
-    with col2:
-        # Keyword Research Card
-        if st.button("keywords", key="keywords_btn", use_container_width=True):
-            st.query_params["app"] = "keywords"
+        if st.button("Open LinkedIn Analysis", key="linkedin_btn", use_container_width=True, type="primary"):
+            st.query_params["app"] = "linkedin"
             st.rerun()
 
+    with col2:
         st.markdown("""
-        <div class="app-card-btn keywords-card" style="margin-top: -380px; pointer-events: none;">
+        <div class="app-card-btn keywords-card">
             <div class="card-icon-big">🔍</div>
             <div class="card-title-big">Keyword Research</div>
             <div class="card-desc">Advanced SEO keyword research tool with competitor analysis and trend tracking</div>
@@ -284,6 +278,10 @@ def render_dashboard():
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+        if st.button("Open Keyword Research", key="keywords_btn", use_container_width=True, type="primary"):
+            st.query_params["app"] = "keywords"
+            st.rerun()
 
     # Footer info
     st.markdown("<br><br>", unsafe_allow_html=True)
