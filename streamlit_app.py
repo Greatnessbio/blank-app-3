@@ -179,6 +179,15 @@ def render_dashboard():
     with col3:
         if st.button("🚪 Logout", use_container_width=True):
             st.session_state.authenticated = False
+            # Clear Grok chat history on logout
+            if "grok_messages" in st.session_state:
+                del st.session_state.grok_messages
+            # Clear Sales chat history on logout
+            if "sales_messages" in st.session_state:
+                del st.session_state.sales_messages
+            # Clear transcripts on logout
+            if "transcripts" in st.session_state:
+                del st.session_state.transcripts
             st.rerun()
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -191,14 +200,7 @@ def render_dashboard():
 
 **LinkedIn Analysis**
 
-Complete LinkedIn intelligence platform for analyzing company presence and generating content
-
-**Features:**
-✓ Scrape and analyze 50+ LinkedIn posts
-✓ AI-powered voice & tone profiling
-✓ Content strategy analysis
-✓ Competitor comparison dashboard
-✓ Generate posts in client's voice"""
+Analyze company LinkedIn presence and generate content in their voice"""
 
         st.button(linkedin_card, key="linkedin_btn", use_container_width=True, on_click=navigate_to_app, args=("linkedin",))
 
@@ -207,14 +209,7 @@ Complete LinkedIn intelligence platform for analyzing company presence and gener
 
 **Keyword Research**
 
-Advanced SEO keyword research tool with competitor analysis and trend tracking
-
-**Features:**
-✓ Search volume & CPC data
-✓ 100+ related keyword suggestions
-✓ Competitor URL analysis
-✓ Opportunity scoring algorithm
-✓ 12-month trend visualization"""
+Advanced SEO keyword research with search volume and competitor analysis"""
 
         st.button(keywords_card, key="keywords_btn", use_container_width=True, on_click=navigate_to_app, args=("keywords",))
 
@@ -224,36 +219,36 @@ Advanced SEO keyword research tool with competitor analysis and trend tracking
     col3, col4 = st.columns(2, gap="large")
 
     with col3:
-        app3_card = """📈
+        app3_card = """🤖
 
-**Analytics Dashboard**
+**Samba Knowledge Chat**
 
-Coming Soon
+Chat with Samba Scientific's website using AI"""
 
-**Features:**
-✓ Performance tracking
-✓ Custom reports
-✓ Data visualization
-✓ Export capabilities
-✓ Real-time insights"""
-
-        st.button(app3_card, key="app3_btn", use_container_width=True, on_click=navigate_to_app, args=("app3",))
+        st.button(app3_card, key="app3_btn", use_container_width=True, on_click=navigate_to_app, args=("grok_chat",))
 
     with col4:
-        app4_card = """🎯
+        app4_card = """🎙️
 
-**Content Planner**
+**Meeting Transcription**
 
-Coming Soon
+Transcribe meetings, extract insights, and generate summaries"""
 
-**Features:**
-✓ Content calendar
-✓ Topic research
-✓ Publishing scheduler
-✓ Campaign tracking
-✓ Team collaboration"""
+        st.button(app4_card, key="app4_btn", use_container_width=True, on_click=navigate_to_app, args=("transcription",))
 
-        st.button(app4_card, key="app4_btn", use_container_width=True, on_click=navigate_to_app, args=("app4",))
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # App cards - Row 3
+    col5, col6 = st.columns(2, gap="large")
+
+    with col5:
+        app5_card = """🎯
+
+**Sales Menu Chat**
+
+Chat with Samba Scientific's sales menu and services using AI"""
+
+        st.button(app5_card, key="app5_btn", use_container_width=True, on_click=navigate_to_app, args=("sales_chat",))
 
     # Suggest Workflow Button
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -296,6 +291,15 @@ def render_app(app_name):
         st.markdown("### Navigation")
         if st.button("🚪 Logout", use_container_width=True):
             st.session_state.authenticated = False
+            # Clear Grok chat history on logout
+            if "grok_messages" in st.session_state:
+                del st.session_state.grok_messages
+            # Clear Sales chat history on logout
+            if "sales_messages" in st.session_state:
+                del st.session_state.sales_messages
+            # Clear transcripts on logout
+            if "transcripts" in st.session_state:
+                del st.session_state.transcripts
             st.query_params.clear()
             st.rerun()
 
@@ -305,6 +309,12 @@ def render_app(app_name):
             st.info("📊 LinkedIn Analysis")
         elif app_name == "keywords":
             st.info("🔍 Keyword Research")
+        elif app_name == "grok_chat":
+            st.info("🤖 Samba Knowledge Chat")
+        elif app_name == "sales_chat":
+            st.info("🎯 Sales Menu Chat")
+        elif app_name == "transcription":
+            st.info("🎙️ Meeting Transcription")
 
     # Import and render the appropriate app
     if app_name == "linkedin":
@@ -314,6 +324,18 @@ def render_app(app_name):
     elif app_name == "keywords":
         from app_keywords import render_keywords_app
         render_keywords_app()
+
+    elif app_name == "grok_chat":
+        from app_grok_chat import render_grok_chat_app
+        render_grok_chat_app()
+
+    elif app_name == "sales_chat":
+        from app_sales_chat import render_sales_chat_app
+        render_sales_chat_app()
+
+    elif app_name == "transcription":
+        from app_transcription import render_transcription_app
+        render_transcription_app()
 
     else:
         st.error(f"Unknown app: {app_name}")
