@@ -1,3 +1,4 @@
+
 Analyze engagement patterns and what content performs best for this company.
 
 COMPANY: {company_name}
