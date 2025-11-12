@@ -1,3 +1,4 @@
+
 """
 SEO Tools Functions
 
@@ -825,9 +826,7 @@ def save_company_analysis(analysis_dict: Dict) -> bool:
             'voice_profile': json.dumps(analysis_dict.get('voice_profile', {})),
             'content_pillars': json.dumps(analysis_dict.get('content_pillars', {})),
             'engagement_metrics': json.dumps(analysis_dict.get('engagement_metrics', {})),
-            'posting_strategy': json.dumps(analysis_dict.get('posting_strategy', {})),
             'top_posts': json.dumps(analysis_dict.get('top_posts', [])),
-            'strategic_recommendations': json.dumps(analysis_dict.get('strategic_recommendations', {})),
             'posts_analyzed': analysis_dict.get('posts_analyzed'),
             'date_range': analysis_dict.get('date_range'),
             'analysis_model': analysis_dict.get('analysis_model')
@@ -1030,6 +1029,31 @@ def get_all_company_analyses(limit: int = 50) -> List[Dict]:
     except Exception as e:
         print(f"Error retrieving company analyses from Supabase: {e}")
         return []
+
+
+def delete_company_analysis(company_url: str) -> bool:
+    """
+    Delete a company analysis from Supabase.
+
+    Args:
+        company_url: LinkedIn company URL to delete
+
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        supabase = get_supabase_client()
+
+        response = supabase.table('linkedin_company_analysis')\
+            .delete()\
+            .eq('company_url', company_url)\
+            .execute()
+
+        return True
+
+    except Exception as e:
+        print(f"Error deleting company analysis from Supabase: {e}")
+        return False
 
 
 def save_generated_posts(
