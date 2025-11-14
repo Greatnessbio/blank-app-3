@@ -132,6 +132,18 @@ st.markdown("""
         color: white;
     }
 
+    /* Row 5 - Company Intelligence (teal) */
+    div[data-testid="column"]:nth-child(9) .stButton > button {
+        background: linear-gradient(135deg, #1fa2ff 0%, #12d8fa 100%);
+        color: white;
+    }
+
+    /* Row 5 - Company Research (indigo) */
+    div[data-testid="column"]:nth-child(10) .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
 
     /* Header styling */
     .dashboard-header {
@@ -284,6 +296,20 @@ Generate Samba blog posts and LinkedIn content from your text using AI"""
 
         st.button(app8_card, key="app8_btn", use_container_width=True, on_click=navigate_to_app, args=("claude_skills",))
 
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # App cards - Row 5
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        app10_card = """🔬
+
+**Company Research**
+
+Multi-source AI research combining Grok, Claude, and LinkedIn for comprehensive company intelligence"""
+
+        st.button(app10_card, key="app10_btn", use_container_width=True, on_click=navigate_to_app, args=("company_research",))
+
     # Suggest Workflow Button
     st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -355,6 +381,8 @@ def render_app(app_name):
             st.info("📢 Google Ads Intelligence")
         elif app_name == "claude_skills":
             st.info("📝 Content Generator")
+        elif app_name == "company_research":
+            st.info("🔬 Company Research")
 
     # Import and render the appropriate app
     if app_name == "linkedin":
@@ -388,6 +416,10 @@ def render_app(app_name):
     elif app_name == "claude_skills":
         from app_claude_skills import render_claude_skills_app
         render_claude_skills_app()
+
+    elif app_name == "company_research":
+        from app_company_research import render_company_research_app
+        render_company_research_app()
 
     else:
         st.error(f"Unknown app: {app_name}")
